@@ -1,0 +1,4 @@
+class Command < ActiveRecord::Base
+  attr_accessible :content, :name, :path
+  has_and_belongs_to_lmany :tags
+end

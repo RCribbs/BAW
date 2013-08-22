@@ -1,0 +1,3 @@
+class CommandTags < ActiveRecord::Base
+  # attr_accessible :title, :body
+end
