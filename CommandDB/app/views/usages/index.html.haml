@@ -1,0 +1,21 @@
+%h1 Listing usages
+
+%table
+  %tr
+    %th Filepath
+    %th Commandusage
+    %th
+    %th
+    %th
+
+  - @usages.each do |usage|
+    %tr
+      %td= usage.filePath
+      %td= usage.commandUsage
+      %td= link_to 'Show', usage
+      %td= link_to 'Edit', edit_usage_path(usage)
+      %td= link_to 'Destroy', usage, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Usage', new_usage_path

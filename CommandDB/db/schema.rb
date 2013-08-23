@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130321170033) do
+ActiveRecord::Schema.define(:version => 20130823011557) do
 
   create_table "command_tags", :id => false, :force => true do |t|
     t.integer "command_id"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(:version => 20130321170033) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "usages", :force => true do |t|
+    t.string   "filePath"
+    t.string   "commandUsage"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
 end

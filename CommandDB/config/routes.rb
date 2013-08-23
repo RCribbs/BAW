@@ -1,4 +1,7 @@
 CommandDB::Application.routes.draw do
+  resources :usages
+
+
   #get "home/index"
 
   resources :commands
