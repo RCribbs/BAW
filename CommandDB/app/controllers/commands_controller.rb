@@ -86,21 +86,36 @@ class CommandsController < ApplicationController
 
   def rebase_command
     @body = response.body.strip
-    @command_updates = @body.split(/,/)
+    @command_updates = @body.split(/\n/)
     @command_updates.each do |command_update|
       @command_data = command_update[1,-1].split(/,/)
-      @command = Command.find_by_name(@command_data[0])
-      if @command_data[4].eql? "updated" then
-        unless @command_data[0].eql? @command_data[2] then
-          @command.name = @command_data[2]
-        end
-        unless @command_data[1].eql? @comand_data[3] then
-          @command.path = @command_data[3]
-        end
-        unless @command_data[4].eql? "False" then
-          @command.rescan
-        end
+      if @command_data[0].eql? "deleted" then
+        Command.destroy(Command.find_by_name(@command_data[2]))
+      elsif @command_data[0].eql? "updated" then
+        @command = Command.find_by_name(@command_data[2])
+      elsif @command_data[0].eql? "added" then
+        @command = Command.create(:path => @command_data[1], :name => @command_data[2])
         @command.save!
+      end
+    end
+  end
+
+  def rebase_script
+    @body = response.body.strip
+    @script_updates = @body.split(/\n/)
+    @script_updates.each do |script_update|
+      @script_data = command_update.split(/,/)
+      if @script_data[0].eql? "deleted" then
+        @usage = Usage.find_by_filePath(@script_data[1])
+        @usage.destroy!
+      elsif @script_data[0].eql? "added" then
+        Usage.scan_and_add(@script_data[1])
+      elsif @script_data[0].eql? "updated" then
+        @usages = Usage.where(:filePath => @script_data[1])
+        @usages.each do |usage|
+          usage.destroy!
+        end
+        Usage.scan_and_add(@script_data[1])
       end
     end
   end

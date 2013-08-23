@@ -8,8 +8,9 @@ CommandDB::Application.routes.draw do
 
   root :to => "home#index"
 
-
+  post '/updateCommand', to: 'command#rebase_command', as: 'command'
   # The priority is based upon order of creation:
+  post 'updateScript', to:  'command#script_command', as: 'command'
   # first created -> highest priority.
 
   # Sample of regular route:
