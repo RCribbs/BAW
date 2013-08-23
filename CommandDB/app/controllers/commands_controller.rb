@@ -90,15 +90,18 @@ class CommandsController < ApplicationController
     @command_updates.each do |command_update|
       @command_data = command_update[1,-1].split(/,/)
       @command = Command.find_by_name(@command_data[0])
-      unless @command_data[0].eql? @command_data[2] then
-        @command.name = @command_data[2]
+      if @command_data[4].eql? "updated" then
+        unless @command_data[0].eql? @command_data[2] then
+          @command.name = @command_data[2]
+        end
+        unless @command_data[1].eql? @comand_data[3] then
+          @command.path = @command_data[3]
+        end
+        unless @command_data[4].eql? "False" then
+          @command.rescan
+        end
+        @command.save!
       end
-      unless @command_data[1].eql? @comand_data[3] then
-        @command.path = @command_data[3]
-      end
-      unless @command_data[4].eql? "False" then
-        @command.rescan
-      end
-      @command.save!
+    end
   end
 end
