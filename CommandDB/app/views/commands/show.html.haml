@@ -10,6 +10,13 @@
   %b Content:
   = @command.content
 
+%p
+  - @usages.each do |usage|
+    = usage.commandUsage
+    %br
+    = usage.filePath
+    %br
+
 = link_to 'Edit', edit_command_path(@command)
 \|
 = link_to 'Back', commands_path

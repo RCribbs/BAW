@@ -12,11 +12,11 @@
   .field
     = f.label :path
     = f.text_area :path
-  .field
-    = f.label :content
-    = f.text_area :content
-  = f.fields_for :tags do |tag_fields|
-    = tag_fields.label :tag_name
-    = tag_fields.text_field :name
+  -#.field
+    -#= f.label :content
+    -#= f.text_area :content
+    -#= f.fields_for :tags do |tag_fields|
+    -#= tag_fields.label :tag_name
+    -#= tag_fields.text_field :name
   .actions
     = f.submit 'Save'

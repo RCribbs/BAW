@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20130823011557) do
   create_table "usages", :force => true do |t|
     t.string   "filePath"
     t.string   "commandUsage"
+    t.integer  "command_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

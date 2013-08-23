@@ -14,7 +14,8 @@ class CommandsController < ApplicationController
   # GET /commands/1.json
   def show
     @command = Command.find(params[:id])
-
+    
+    @usages = @command.usages
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @command }
@@ -83,6 +84,21 @@ class CommandsController < ApplicationController
     end
   end
 
-  def rebase
+  def rebase_command
+    @body = response.body.strip
+    @command_updates = @body.split(/,/)
+    @command_updates.each do |command_update|
+      @command_data = command_update[1,-1].split(/,/)
+      @command = Command.find_by_name(@command_data[0])
+      unless @command_data[0].eql? @command_data[2] then
+        @command.name = @command_data[2]
+      end
+      unless @command_data[1].eql? @comand_data[3] then
+        @command.path = @command_data[3]
+      end
+      unless @command_data[4].eql? "False" then
+        @command.rescan
+      end
+      @command.save!
   end
 end

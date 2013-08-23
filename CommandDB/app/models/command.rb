@@ -3,4 +3,8 @@ class Command < ActiveRecord::Base
   has_many :command_tags
   has_many :tags, :through => :command_tags
   has_many :usages
+  
+  def scan
+    
+  end
 end
