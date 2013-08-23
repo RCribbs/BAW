@@ -1,19 +1,16 @@
 %h1 Listing commands
 
-%table
+%table{:border=>"1px"}
   %tr
     %th Name
     %th Path
-    %th Content
-    %th
-    %th
-    %th
+    %th{:colspan=>"3"}
+
 
   - @commands.each do |command|
     %tr
       %td= command.name
       %td= command.path
-      %td= command.content
       %td= link_to 'Show', command
       %td= link_to 'Edit', edit_command_path(command)
       %td= link_to 'Destroy', command, :method => :delete, :data => { :confirm => 'Are you sure?' }

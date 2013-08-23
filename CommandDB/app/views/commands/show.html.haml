@@ -1,16 +1,16 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @command.name
+%h1=@command.name
+
 %p
   %b Path:
   = @command.path
-%p
-  %b Content:
-  = @command.content
+/%p
+/  %b Description:
+/  = @command.description
 
 %p
+  %b Usages:
   - @usages.each do |usage|
     = usage.commandUsage
     %br
