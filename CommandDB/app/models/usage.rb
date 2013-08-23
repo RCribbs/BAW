@@ -11,7 +11,7 @@ class Usage < ActiveRecord::Base
         if line.eql? '*/' then next end
         @command = Command.find_by_name(line.split(/ /)[0])
         unless @command.nil? then
-          @usage = Usage.create(:filePath => fPath, :commandUsage = line.chomp)
+          @usage = Usage.create(:filePath => fPath, :commandUsage => line.chomp)
           @command.usages << @usage
         end
       end
