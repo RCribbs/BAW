@@ -82,4 +82,7 @@ class CommandsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def rebase
+  end
 end
