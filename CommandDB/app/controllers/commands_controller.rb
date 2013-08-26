@@ -84,11 +84,14 @@ class CommandsController < ApplicationController
     end
   end
 
+# POST /updateCommand
   def rebase_command
-    @body = response.body.strip
+    @body = request.raw_post
     @command_updates = @body.split(/\n/)
     @command_updates.each do |command_update|
-      @command_data = command_update[1,-1].split(/,/)
+	  puts command_update
+      @command_data = command_update.split(/,/)
+	  puts @command_data
       if @command_data[0].eql? "deleted" then
         Command.destroy(Command.find_by_name(@command_data[2]))
       elsif @command_data[0].eql? "updated" then
@@ -101,10 +104,12 @@ class CommandsController < ApplicationController
   end
 
   def rebase_script
-    @body = response.body.strip
+    @body = request.raw_post
     @script_updates = @body.split(/\n/)
+	puts @script_update
     @script_updates.each do |script_update|
-      @script_data = command_update.split(/,/)
+      @script_data = script_update.split(/,/)
+	  puts @script_data
       if @script_data[0].eql? "deleted" then
         @usage = Usage.find_by_filePath(@script_data[1])
         @usage.destroy!
